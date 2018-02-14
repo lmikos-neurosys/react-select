@@ -2232,6 +2232,7 @@ var Async = function (_Component) {
 		value: function render() {
 			var _this3 = this;
 
+			console.log('async render');
 			var _props3 = this.props,
 			    children = _props3.children,
 			    loadingPlaceholder = _props3.loadingPlaceholder,
