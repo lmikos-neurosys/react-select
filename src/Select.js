@@ -39,7 +39,7 @@ const shouldShowValue = (state, props) => {
 
 	if (!inputValue) return true;
 
-	if (!onSelectResetsInput){
+	if (!onSelectResetsInput) {
 		return !(!isFocused && isPseudoFocused || isFocused && !isPseudoFocused);
 	}
 
@@ -74,7 +74,7 @@ const handleRequired = (value, multi) => {
 };
 
 class Select extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		[
 			'clearValue',
@@ -109,7 +109,7 @@ class Select extends React.Component {
 		};
 	}
 
-	componentWillMount () {
+	componentWillMount() {
 		this._instancePrefix = 'react-select-' + (this.props.instanceId || ++instanceId) + '-';
 		const valueArray = this.getValueArray(this.props.value);
 
@@ -120,7 +120,7 @@ class Select extends React.Component {
 		}
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		if (typeof this.props.autofocus !== 'undefined' && typeof console !== 'undefined') {
 			console.warn('Warning: The autofocus prop has changed to autoFocus, support will be removed after react-select@1.0');
 		}
@@ -129,7 +129,7 @@ class Select extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps (nextProps) {
+	componentWillReceiveProps(nextProps) {
 		const valueArray = this.getValueArray(nextProps.value, nextProps);
 
 		if (nextProps.required) {
@@ -146,7 +146,7 @@ class Select extends React.Component {
 		}
 	}
 
-	componentDidUpdate (prevProps, prevState) {
+	componentDidUpdate(prevProps, prevState) {
 		// focus to the selected option
 		if (this.menu && this.focused && this.state.isOpen && !this.hasScrolledToOption) {
 			const focusedOptionNode = findDOMNode(this.focused);
@@ -198,11 +198,11 @@ class Select extends React.Component {
 		}
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		this.toggleTouchOutsideEvent(false);
 	}
 
-	toggleTouchOutsideEvent (enabled) {
+	toggleTouchOutsideEvent(enabled) {
 		if (enabled) {
 			if (!document.addEventListener && document.attachEvent) {
 				document.attachEvent('ontouchstart', this.handleTouchOutside);
@@ -218,34 +218,34 @@ class Select extends React.Component {
 		}
 	}
 
-	handleTouchOutside (event) {
+	handleTouchOutside(event) {
 		// handle touch outside on ios to dismiss menu
 		if (this.wrapper && !this.wrapper.contains(event.target)) {
 			this.closeMenu();
 		}
 	}
 
-	focus () {
+	focus() {
 		if (!this.input) return;
 		this.input.focus();
 	}
 
-	blurInput () {
+	blurInput() {
 		if (!this.input) return;
 		this.input.blur();
 	}
 
-	handleTouchMove () {
+	handleTouchMove() {
 		// Set a flag that the view is being dragged
 		this.dragging = true;
 	}
 
-	handleTouchStart () {
+	handleTouchStart() {
 		// Set a flag that the view is not being dragged
 		this.dragging = false;
 	}
 
-	handleTouchEnd (event) {
+	handleTouchEnd(event) {
 		// Check if the view is being dragged, In this case
 		// we don't want to fire the click event (because the user only wants to scroll)
 		if (this.dragging) return;
@@ -254,7 +254,7 @@ class Select extends React.Component {
 		this.handleMouseDown(event);
 	}
 
-	handleTouchEndClearValue (event) {
+	handleTouchEndClearValue(event) {
 		// Check if the view is being dragged, In this case
 		// we don't want to fire the click event (because the user only wants to scroll)
 		if (this.dragging) return;
@@ -263,7 +263,7 @@ class Select extends React.Component {
 		this.clearValue(event);
 	}
 
-	handleMouseDown (event) {
+	handleMouseDown(event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
 		if (this.props.disabled || (event.type === 'mousedown' && event.button !== 0)) {
@@ -332,7 +332,7 @@ class Select extends React.Component {
 		}
 	}
 
-	handleMouseDownOnArrow (event) {
+	handleMouseDownOnArrow(event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
 		if (this.props.disabled || (event.type === 'mousedown' && event.button !== 0)) {
@@ -353,7 +353,7 @@ class Select extends React.Component {
 		}
 	}
 
-	handleMouseDownOnMenu (event) {
+	handleMouseDownOnMenu(event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
 		if (this.props.disabled || (event.type === 'mousedown' && event.button !== 0)) {
@@ -367,8 +367,8 @@ class Select extends React.Component {
 		this.focus();
 	}
 
-	closeMenu () {
-		if(this.props.onCloseResetsInput) {
+	closeMenu() {
+		if (this.props.onCloseResetsInput) {
 			this.setState({
 				inputValue: this.handleInputValueChange(''),
 				isOpen: false,
@@ -383,7 +383,7 @@ class Select extends React.Component {
 		this.hasScrolledToOption = false;
 	}
 
-	handleInputFocus (event) {
+	handleInputFocus(event) {
 		if (this.props.disabled) return;
 
 		let toOpen = this.state.isOpen || this._openAfterFocus || this.props.openOnFocus;
@@ -402,7 +402,7 @@ class Select extends React.Component {
 		this._openAfterFocus = false;
 	}
 
-	handleInputBlur (event) {
+	handleInputBlur(event) {
 		// The check for menu.contains(activeElement) is necessary to prevent IE11's scrollbar from closing the menu in certain contexts.
 		if (this.menu && (this.menu === document.activeElement || this.menu.contains(document.activeElement))) {
 			this.focus();
@@ -423,7 +423,7 @@ class Select extends React.Component {
 		this.setState(onBlurredState);
 	}
 
-	handleInputChange (event) {
+	handleInputChange(event) {
 		let newInputValue = event.target.value;
 
 		if (this.state.inputValue !== event.target.value) {
@@ -460,7 +460,7 @@ class Select extends React.Component {
 		return newValue;
 	}
 
-	handleKeyDown (event) {
+	handleKeyDown(event) {
 		if (this.props.disabled) return;
 
 		if (typeof this.props.onInputKeyDown === 'function') {
@@ -470,6 +470,8 @@ class Select extends React.Component {
 			}
 		}
 
+		console.log(`this.props.allwaysInEditorMode:${this.props.allwaysInEditorMode}`);
+
 		switch (event.keyCode) {
 			case 8: // backspace
 				if (!this.state.inputValue && this.props.backspaceRemoves) {
@@ -478,7 +480,20 @@ class Select extends React.Component {
 				}
 				break;
 			case 9: // tab
-				if (!this.props.tabSelectsValue) {
+				if (this.props.allwaysInEditorMode) {
+					if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
+						break;
+					}
+					event.preventDefault();
+					this.selectFocusedOption();
+				} else {
+					if (!this.props.tabSelectsValue) {
+						break;
+					}
+					event.preventDefault();
+					this.selectFocusedOption();
+				}
+				if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
 					break;
 				}
 				event.preventDefault();
@@ -554,12 +569,12 @@ class Select extends React.Component {
 		}
 	}
 
-	handleValueClick (option, event) {
+	handleValueClick(option, event) {
 		if (!this.props.onValueClick) return;
 		this.props.onValueClick(option, event);
 	}
 
-	handleMenuScroll (event) {
+	handleMenuScroll(event) {
 		if (!this.props.onMenuScrollToBottom) return;
 		let { target } = event;
 		if (target.scrollHeight > target.offsetHeight && (target.scrollHeight - target.offsetHeight - target.scrollTop) <= 0) {
@@ -567,7 +582,7 @@ class Select extends React.Component {
 		}
 	}
 
-	getOptionLabel (op) {
+	getOptionLabel(op) {
 		return op[this.props.labelKey];
 	}
 
@@ -577,7 +592,7 @@ class Select extends React.Component {
 	 * @param {Object}		nextProps	- optionally specify the nextProps so the returned array uses the latest configuration
 	 * @returns	{Array}	the value of the select represented in an array
 	 */
-	getValueArray (value, nextProps = undefined) {
+	getValueArray(value, nextProps = undefined) {
 		/** support optionally passing in the `nextProps` so `componentWillReceiveProps` updates will function as expected */
 		const props = typeof nextProps === 'object' ? nextProps : this.props;
 		if (props.multi) {
@@ -594,7 +609,7 @@ class Select extends React.Component {
 		return expandedValue ? [expandedValue] : [];
 	}
 
-	setValue (value) {
+	setValue(value) {
 		if (this.props.autoBlur) {
 			this.blurInput();
 		}
@@ -610,7 +625,7 @@ class Select extends React.Component {
 		}
 	}
 
-	selectValue (value) {
+	selectValue(value) {
 		// NOTE: we actually add/set the value in a callback to make sure the
 		// input value is empty to avoid styling issues in Chrome
 		if (this.props.closeOnSelect) {
@@ -641,7 +656,7 @@ class Select extends React.Component {
 		}
 	}
 
-	addValue (value) {
+	addValue(value) {
 		let valueArray = this.getValueArray(this.props.value);
 		const visibleOptions = this._visibleOptions.filter(val => !val.disabled);
 		const lastValueIndex = visibleOptions.indexOf(value);
@@ -655,20 +670,20 @@ class Select extends React.Component {
 		}
 	}
 
-	popValue () {
+	popValue() {
 		let valueArray = this.getValueArray(this.props.value);
 		if (!valueArray.length) return;
-		if (valueArray[valueArray.length-1].clearableValue === false) return;
+		if (valueArray[valueArray.length - 1].clearableValue === false) return;
 		this.setValue(this.props.multi ? valueArray.slice(0, valueArray.length - 1) : null);
 	}
 
-	removeValue (value) {
+	removeValue(value) {
 		let valueArray = this.getValueArray(this.props.value);
 		this.setValue(valueArray.filter(i => i[this.props.valueKey] !== value[this.props.valueKey]));
 		this.focus();
 	}
 
-	clearValue (event) {
+	clearValue(event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, ignore it.
 		if (event && event.type === 'mousedown' && event.button !== 0) {
@@ -686,7 +701,7 @@ class Select extends React.Component {
 		this._focusAfterClear = true;
 	}
 
-	getResetValue () {
+	getResetValue() {
 		if (this.props.resetValue !== undefined) {
 			return this.props.resetValue;
 		} else if (this.props.multi) {
@@ -696,37 +711,37 @@ class Select extends React.Component {
 		}
 	}
 
-	focusOption (option) {
+	focusOption(option) {
 		this.setState({
 			focusedOption: option
 		});
 	}
 
-	focusNextOption () {
+	focusNextOption() {
 		this.focusAdjacentOption('next');
 	}
 
-	focusPreviousOption () {
+	focusPreviousOption() {
 		this.focusAdjacentOption('previous');
 	}
 
-	focusPageUpOption () {
+	focusPageUpOption() {
 		this.focusAdjacentOption('page_up');
 	}
 
-	focusPageDownOption () {
+	focusPageDownOption() {
 		this.focusAdjacentOption('page_down');
 	}
 
-	focusStartOption () {
+	focusStartOption() {
 		this.focusAdjacentOption('start');
 	}
 
-	focusEndOption () {
+	focusEndOption() {
 		this.focusAdjacentOption('end');
 	}
 
-	focusAdjacentOption (dir) {
+	focusAdjacentOption(dir) {
 		const options = this._visibleOptions
 			.map((option, index) => ({ option, index }))
 			.filter(option => !option.option.disabled);
@@ -750,7 +765,7 @@ class Select extends React.Component {
 				break;
 			}
 		}
-		if (dir === 'next' && focusedIndex !== -1 ) {
+		if (dir === 'next' && focusedIndex !== -1) {
 			focusedIndex = (focusedIndex + 1) % options.length;
 		} else if (dir === 'previous') {
 			if (focusedIndex > 0) {
@@ -788,17 +803,17 @@ class Select extends React.Component {
 		});
 	}
 
-	getFocusedOption () {
+	getFocusedOption() {
 		return this._focusedOption;
 	}
 
-	selectFocusedOption () {
+	selectFocusedOption() {
 		if (this._focusedOption) {
 			return this.selectValue(this._focusedOption);
 		}
 	}
 
-	renderLoading () {
+	renderLoading() {
 		if (!this.props.isLoading) return;
 		return (
 			<span className="Select-loading-zone" aria-hidden="true">
@@ -807,7 +822,7 @@ class Select extends React.Component {
 		);
 	}
 
-	renderValue (valueArray, isOpen) {
+	renderValue(valueArray, isOpen) {
 		let renderLabel = this.props.valueRenderer || this.getOptionLabel;
 		let ValueComponent = this.props.valueComponent;
 		if (!valueArray.length) {
@@ -850,7 +865,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderInput (valueArray, focusedOptionIndex) {
+	renderInput(valueArray, focusedOptionIndex) {
 		const className = classNames('Select-input', this.props.inputProps.className);
 		const isOpen = this.state.isOpen;
 
@@ -863,9 +878,9 @@ class Select extends React.Component {
 		});
 
 		let value = this.state.inputValue;
-		if (value && !this.props.onSelectResetsInput && !this.state.isFocused){
+		if (value && !this.props.onSelectResetsInput && !this.state.isFocused) {
 			// it hides input value when it is not focused and was not reset on select
-			value= '';
+			value = '';
 		}
 
 		const inputProps = {
@@ -913,7 +928,7 @@ class Select extends React.Component {
 					onFocus={this.handleInputFocus}
 					ref={ref => this.input = ref}
 					role="combobox"
-					style={{ border: 0, width: 1, display:'inline-block' }}
+					style={{ border: 0, width: 1, display: 'inline-block' }}
 					tabIndex={this.props.tabIndex || 0}
 				/>
 			);
@@ -925,13 +940,13 @@ class Select extends React.Component {
 			);
 		}
 		return (
-			<div className={ className } key="input-wrap" style={{display: 'inline-block'}}>
+			<div className={className} key="input-wrap" style={{ display: 'inline-block' }}>
 				<input id={this.props.id} {...inputProps} />
 			</div>
 		);
 	}
 
-	renderClear () {
+	renderClear() {
 		const valueArray = this.getValueArray(this.props.value);
 		if (!this.props.clearable
 			|| !valueArray.length
@@ -955,7 +970,7 @@ class Select extends React.Component {
 		);
 	}
 
-	renderArrow () {
+	renderArrow() {
 		if (!this.props.arrowRenderer) return;
 
 		const onMouseDown = this.handleMouseDownOnArrow;
@@ -976,7 +991,7 @@ class Select extends React.Component {
 		);
 	}
 
-	filterOptions (excludeOptions) {
+	filterOptions(excludeOptions) {
 		const filterValue = this.state.inputValue;
 		const options = this.props.options || [];
 		if (this.props.filterOptions) {
@@ -1011,7 +1026,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderMenu (options, valueArray, focusedOption) {
+	renderMenu(options, valueArray, focusedOption) {
 		if (options && options.length) {
 			return this.props.menuRenderer({
 				focusedOption,
@@ -1042,7 +1057,7 @@ class Select extends React.Component {
 		}
 	}
 
-	renderHiddenField (valueArray) {
+	renderHiddenField(valueArray) {
 		if (!this.props.name) return;
 		if (this.props.joinValues) {
 			let value = valueArray.map(i => stringifyValue(i[this.props.valueKey])).join(this.props.delimiter);
@@ -1068,7 +1083,7 @@ class Select extends React.Component {
 		));
 	}
 
-	getFocusableOptionIndex (selectedOption) {
+	getFocusableOptionIndex(selectedOption) {
 		const options = this._visibleOptions;
 		if (!options.length) return null;
 
@@ -1094,7 +1109,7 @@ class Select extends React.Component {
 		return null;
 	}
 
-	renderOuter (options, valueArray, focusedOption) {
+	renderOuter(options, valueArray, focusedOption) {
 		let menu = this.renderMenu(options, valueArray, focusedOption);
 		if (!menu) {
 			return null;
@@ -1118,7 +1133,7 @@ class Select extends React.Component {
 		);
 	}
 
-	render () {
+	render() {
 		let valueArray = this.getValueArray(this.props.value);
 		let options = this._visibleOptions = this.filterOptions(this.props.multi && this.props.removeSelected ? valueArray : null);
 		let isOpen = this.state.isOpen;
@@ -1161,8 +1176,8 @@ class Select extends React.Component {
 
 		return (
 			<div ref={ref => this.wrapper = ref}
-				 className={className}
-				 style={this.props.wrapperStyle}>
+				className={className}
+				style={this.props.wrapperStyle}>
 				{this.renderHiddenField(valueArray)}
 				<div ref={ref => this.control = ref}
 					className="Select-control"
@@ -1308,7 +1323,7 @@ Select.defaultProps = {
 	searchable: true,
 	simpleValue: false,
 	tabSelectsValue: true,
- 	trimFilter: true,
+	trimFilter: true,
 	valueComponent: Value,
 	valueKey: 'value',
 };
