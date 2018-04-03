@@ -1115,7 +1115,7 @@ var Select$1 = function (_React$Component) {
 					break;
 				case 9:
 					// tab
-					if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
+					if (!this.props.tabSelectsValue) {
 						break;
 					}
 					event.preventDefault();
