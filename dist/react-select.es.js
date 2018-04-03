@@ -1105,6 +1105,8 @@ var Select$1 = function (_React$Component) {
 				}
 			}
 
+			console.log('this.props.allwaysInEditorMode:' + this.props.allwaysInEditorMode);
+
 			switch (event.keyCode) {
 				case 8:
 					// backspace
@@ -1115,7 +1117,20 @@ var Select$1 = function (_React$Component) {
 					break;
 				case 9:
 					// tab
-					if (!this.props.tabSelectsValue) {
+					if (this.props.allwaysInEditorMode) {
+						if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
+							break;
+						}
+						event.preventDefault();
+						this.selectFocusedOption();
+					} else {
+						if (!this.props.tabSelectsValue) {
+							break;
+						}
+						event.preventDefault();
+						this.selectFocusedOption();
+					}
+					if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
 						break;
 					}
 					event.preventDefault();
