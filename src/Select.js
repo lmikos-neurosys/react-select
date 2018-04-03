@@ -480,25 +480,21 @@ class Select extends React.Component {
 				}
 				break;
 			case 9: // tab
-				if (this.props.gridBehaviour) {
+				if (this.props.gridBehaviour && this.props.tabSelectsValue) {
+					event.preventDefault();
+					if (this.state.isOpen) {
+						event.preventDefault();
+						this.selectFocusedOption();
+					}
+					break;
+				} else {
 					if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
 						break;
 					}
 					event.preventDefault();
 					this.selectFocusedOption();
-				} else {
-					if (!this.props.tabSelectsValue) {
-						break;
-					}
-					event.preventDefault();
-					this.selectFocusedOption();
 				}
-				if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
-					break;
-				}
-				event.preventDefault();
-				this.selectFocusedOption();
-				break;
+
 			case 13: // enter
 				event.preventDefault();
 				event.stopPropagation();
