@@ -1110,7 +1110,7 @@ var Select$1 = function (_React$Component) {
 				}
 			}
 
-			console.log('this.props.allwaysInEditorMode:' + this.props.allwaysInEditorMode);
+			console.log('this.props.gridBehaviour:' + this.props.gridBehaviour);
 
 			switch (event.keyCode) {
 				case 8:
@@ -1122,7 +1122,7 @@ var Select$1 = function (_React$Component) {
 					break;
 				case 9:
 					// tab
-					if (this.props.allwaysInEditorMode) {
+					if (this.props.gridBehaviour) {
 						if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
 							break;
 						}
